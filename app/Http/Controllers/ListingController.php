@@ -43,4 +43,27 @@ class ListingController extends Controller
         $post->save();
         return redirect()->back();
     }
+    public function edit(Listing $id){
+        $post = Listing::find($id->id);
+        return view('Listings.editPost',compact('post'));
+    }
+    public function update(Request $request,$id){
+        $post = Listing::find($id);
+        $post->title = $request->title;
+        $post->description = $request->description;
+        $post->website = $request->website;
+        $post->email = $request->email;
+        $post->tags = $request->tags;
+        $post->location = $request->location;
+        $post->company= $request->company;
+        if($request->logo){
+            $image = $request->logo;
+            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $request->logo->move('Logos',$imageName);
+            $post->image= $imageName;     
+        }
+        // $post->user_id= auth()->user()->id;
+        $post->save();
+        return redirect()->back();
+    }
 }

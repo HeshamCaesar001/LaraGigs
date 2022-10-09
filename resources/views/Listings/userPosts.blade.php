@@ -43,7 +43,7 @@
                 <div class="flex">
                     <img
                         class="hidden w-48 mr-6 md:block"
-                        src="images/acme.png"
+                        src="/Logos/{{$list->image}}"
                         alt=""
                     />
                     <div>
@@ -65,6 +65,9 @@
                         </ul>
                         <div class="text-lg mt-4">
                             <i class="fa-solid fa-location-dot"></i> {{$list->location}}
+                        </div>
+                        <div>
+                            <a href="{{route('edit.post',$list->id)}}" class="btn btn-primary"> Edit</a>
                         </div>
                     </div>
                 </div>

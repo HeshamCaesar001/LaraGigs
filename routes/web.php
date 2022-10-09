@@ -21,10 +21,14 @@ use App\Http\Controllers\ListingController;
 
 Auth::routes();
 
+    Route::get('/myPosts',[ListingController::class,'UserPosts'])->middleware('auth')->name('user.posts');
+    Route::get('/creatPost',[ListingController::class,'create'])->middleware('auth')->name('create.list');
+    Route::post('/savePost',[ListingController::class,'store'])->middleware('auth')->name('save.post');
+    Route::get('/editPost/{id}',[ListingController::class,'edit'])->middleware('auth')->name('edit.post');
+    Route::post('/update/{id}',[ListingController::class,'update'])->middleware('auth')->name('update.post');
+
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home',[HomeController::class,'index'])->name('index');
 Route::get('/show/{list}',[HomeController::class,'showList'])->name('show.list');
 Route::get('/?tag={tag}',[HomeController::class,'showListWithTag'])->name('show.list.tag');
-Route::get('/myPosts',[ListingController::class,'UserPosts'])->name('user.posts');
-Route::get('/creatPost',[ListingController::class,'create'])->name('create.list');
-Route::post('/savePost',[ListingController::class,'store'])->name('save.post');
+
